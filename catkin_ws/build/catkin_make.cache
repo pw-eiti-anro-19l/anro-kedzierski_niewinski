@@ -1,0 +1,2 @@
+anro-KEDZIERSKI_NIEWINSKI/laboratorium1:beginner_tutorials
+-DCATKIN_DEVEL_PREFIX=/home/mkedzie3/anro-kedzierski_niewinski/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/mkedzie3/anro-kedzierski_niewinski/catkin_ws/install -G Unix Makefiles
