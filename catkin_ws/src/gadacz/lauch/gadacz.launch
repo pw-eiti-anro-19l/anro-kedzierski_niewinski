@@ -1,6 +1,10 @@
 <launch>
-    <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
-    <node pkg="gadacz" name="talker" type="program.py"/>
-    <remap from="talker" to="sim"/>
+	<param name="fwd" value = "s"/>
+	<param name="bwd" value = "x"/>
+	<param name="lft" value = "z"/>
+	<param name="rth" value = "c"/>
+	<node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+	<node pkg="gadacz" name="talker" type="program.py"/>
+	<remap from="talker" to="sim"/>
 </launch>
 
