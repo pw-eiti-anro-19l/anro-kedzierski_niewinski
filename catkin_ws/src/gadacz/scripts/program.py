@@ -11,32 +11,27 @@ def talker():
 	message = Twist()
 	while not rospy.is_shutdown():
 		character = click.getchar()
-		if character == frw_char:
+		if character == 'w':
 			message.linear.x  = 1.0
 			message.angular.z = 0.0
-		elif character ==bwd_char:
+		elif character =='s':
 			message.linear.x  = -1.0
 			message.angular.z = 0.0
-		elif character ==lft_char:
+		elif character =='a':
 			message.linear.x  = 0.0
 			message.angular.z = 1.0
-		elif character ==rth_char:
+		elif character =='d':
 			message.linear.x  = 0.0
 			message.angular.z = -1.0
 
 	 	elif character =='q':
 			break 
-			
+
 		pub.publish(message)
 		rate.sleep()
 
 if __name__ == '__main__':
-	frw_char = rospy.get_param('frw')
-	bwd_char = rospy.get_param('bwd')
-	lft_char = rospy.get_param('lft')
-	rth_char = rospy.get_param('rth')	
 	try:
 		talker()
 	except rospy.ROSInterruptException:
 		pass
-
