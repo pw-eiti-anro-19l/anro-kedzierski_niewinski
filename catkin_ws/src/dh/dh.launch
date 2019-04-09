@@ -4,10 +4,6 @@
 	<arg name="rvizconfig" default="$(find dh)/rviz/urdf.rviz" />
 
 	<node name="joint_state_publisher" pkg="joint_state_publisher" 			type="joint_state_publisher" />
-  	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
   	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
-        <!--
-	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
-        <node name="state_publisher" pkg="dh" type="state_publisher" />
-	-->
 </launch>
