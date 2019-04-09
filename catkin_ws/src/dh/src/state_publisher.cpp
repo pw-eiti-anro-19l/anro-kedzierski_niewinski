@@ -8,10 +8,10 @@ int main(int argc, char** argv) {
     ros::NodeHandle n;
     ros::Publisher joint_pub = n.advertise<sensor_msgs::JointState>("joint_states", 1);
     tf::TransformBroadcaster broadcaster;
-    ros::Rate loop_rate(60);
+    ros::Rate loop_rate(360);
 
    	const double degree = M_PI/180;
-	double tilt = 0, tinc = degree, swivel=0, angle=0, height=0, hinc=0.005;
+	double angle=0;
     // message declarations
    
 
@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
        angle += degree/4;
 
         // This will adjust as needed per iteration
-        loop_rate.sleep();
+      loop_rate.sleep();
     }
 
 

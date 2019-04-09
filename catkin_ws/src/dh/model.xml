@@ -12,8 +12,9 @@
 
 <link name="floor">
     	<visual>
+
       		<geometry>
-        		<box size ="1 1 0"/>
+        		<box size ="10 10 0"/>
      		 </geometry>
 	<material name="white"/>
     	</visual>
@@ -21,6 +22,7 @@
 
 <link name="link1">
     	<visual>
+
       		<geometry>
         		<cylinder length="2" radius="0.2"/>
      		 </geometry>
@@ -28,6 +30,7 @@
 </link>
 <link name="link2">
    	 <visual>
+
       		<geometry>
         		<cylinder length="1" radius="0.2"/>
       		</geometry>
@@ -37,6 +40,7 @@
   </link>
 <link name="link3">
     	<visual>
+
      		 <geometry>
        			 <cylinder length="1" radius="0.2"/>
       		</geometry>
