@@ -18,7 +18,10 @@ int main(int argc, char** argv) {
     while (ros::ok()) {
        //update joint_state
 	tf::Quaternion myq;
-	
+	ros::param::get("theta1",theta1);
+	ros::param::get("theta2",theta1);
+	ros::param::get("theta3",theta1);
+	ros::param::get("a2",a2);
 	//floor->link1
 	geometry_msgs::TransformStamped odom1;
     	sensor_msgs::JointState joint1;
