@@ -19,8 +19,8 @@ int main(int argc, char** argv) {
        //update joint_state
 	tf::Quaternion myq;
 	ros::param::get("theta1",theta1);
-	ros::param::get("theta2",theta1);
-	ros::param::get("theta3",theta1);
+	ros::param::get("theta2",theta2);
+	ros::param::get("theta3",theta3);
 	ros::param::get("a2",a2);
 	//floor->link1
 	geometry_msgs::TransformStamped odom1;
@@ -79,11 +79,6 @@ int main(int argc, char** argv) {
         broadcaster.sendTransform(odom3);
 
 
-
-
-
-        // Create new robot state
-       angle += degree/4;
 
         // This will adjust as needed per iteration
       loop_rate.sleep();
