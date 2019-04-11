@@ -1,5 +1,8 @@
 <launch>
-        <param name="robot_description" command="cat $(find dh)/model.xml" />
-        <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+        <param name="robot_description" command="cat $(find dh)/model2.xml" />
+	<param name="use_gui" value="false"/>
         <node name="state_publisher" pkg="dh" type="state_publisher" />
+	<node name="joint_state_publisher" pkg="joint_state_publisher" 	type="joint_state_publisher" />
+
+	 <node name="rviz" pkg="rviz" type="rviz" args="-f floor" required="true"/>
 </launch>

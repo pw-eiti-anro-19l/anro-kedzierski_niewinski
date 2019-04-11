@@ -9,6 +9,45 @@
     <color rgba="1 1 1 1"/>
 </material>
 
+
+<link name="floor">
+    	<visual>
+
+      		<geometry>
+        		<box size ="10 10 0"/>
+     		 </geometry>
+	<material name="white"/>
+    	</visual>
+</link>
+
+<link name="link1">
+    	<visual>
+
+      		<geometry>
+        		<cylinder length="1" radius="0.2"/>
+     		 </geometry>
+    	</visual>
+</link>
+<link name="link2">
+   	 <visual>
+
+      		<geometry>
+        		<cylinder length="1" radius="0.2"/>
+      		</geometry>
+	<material name="blue"/>
+    	</visual>
+	
+  </link>
+<link name="link3">
+    	<visual>
+
+     		 <geometry>
+       			 <cylinder length="1" radius="0.2"/>
+      		</geometry>
+	<material name="white"/>
+    	</visual>
+</link>
+
 <joint name="joint1" type="continuous">
 	<parent link="floor"/>
 	<child link="link1"/>
@@ -20,7 +59,7 @@
 <joint name="joint2" type="continuous">
 	<parent link="link1"/>
 	<child link="link2"/>
-	<origin xyz="0 0.5 0.5" rpy="-1.57 0 0" />
+	<origin xyz="0 0 0.5" rpy="-1.57 0 0" />
 	
 </joint>
 

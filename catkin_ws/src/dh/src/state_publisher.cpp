@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
     ros::Rate loop_rate(360);
 
    	const double degree = M_PI/180;
-	double angle=0, theta1=0,theta2=0,theta3=0, a2=1;
+	double angle=0, theta1=0,theta2=0,theta3=0, a2=0.5;
     // message declarations
    
 
@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
 	tf::quaternionTFToMsg(myq,msg);
 	odom1.transform.translation.x = 0;
         odom1.transform.translation.y = 0;
-        odom1.transform.translation.z =0.5;
+        odom1.transform.translation.z = 0.5;
 	odom1.transform.rotation=msg;
         odom1.header.stamp = ros::Time::now();
         //send the joint state and transform
@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
 	tf::quaternionTFToMsg(myq,msg);
 	odom2.transform.rotation=msg;
 	odom2.transform.translation.x = 0;
-        odom2.transform.translation.y = 0.5;
+        odom2.transform.translation.y = 0;
         odom2.transform.translation.z = 0.5;
         odom2.header.stamp = ros::Time::now();
         //send the joint state and transform
@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
     	sensor_msgs::JointState joint3;
     	odom3.header.frame_id = "link2";
     	odom3.child_frame_id = "link3";
-	myq.setRPY(theta3,0,0); //theta 3
+	myq.setRPY(0,theta3,0); //theta 3
 	tf::quaternionTFToMsg(myq,msg);
 	odom3.transform.rotation=msg;
 	odom3.transform.translation.x = 0;
