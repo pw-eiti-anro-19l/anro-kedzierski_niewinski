@@ -49,11 +49,11 @@ int main(int argc, char** argv) {
     	odom2.child_frame_id = "link2";
         joint2.header.stamp = ros::Time::now();
 	//sterowanie
-	myq.setRPY(-1.57,theta2,0); //theta 2
+	myq.setRPY(-1.57+theta2, 0 ,0); //theta 2
 	tf::quaternionTFToMsg(myq,msg);
 	odom2.transform.rotation=msg;
 	odom2.transform.translation.x = 0;
-        odom2.transform.translation.y = 0;
+        odom2.transform.translation.y = 0.5;
         odom2.transform.translation.z = 0.5;
         odom2.header.stamp = ros::Time::now();
         //send the joint state and transform

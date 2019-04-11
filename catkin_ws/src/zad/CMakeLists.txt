@@ -14,7 +14,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   tf
-  orocos_kdl
+  kdl_conversions
+  kdl_parser
 )
 find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs tf)
 
@@ -202,5 +203,6 @@ include_directories(
 include_directories(include ${catkin_INCLUDE_DIRS})
 add_executable(state_publisher src/state_publisher.cpp)
 target_link_libraries(state_publisher ${catkin_LIBRARIES})
+
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)

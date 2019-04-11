@@ -1,5 +1,6 @@
 
 <robot name="zad2">
+<xacro:property name="params" value="${load_yaml('/urdfparam.yaml')}"/>
 
 <material name="blue">
     <color rgba="0 0 0.8 1"/>
@@ -24,17 +25,20 @@
     	<visual>
 
       		<geometry>
-        		<cylinder length="1" radius="0.05"/>
+        		<cylinder length="${params['j1']['len']" radius="0.05"/>
      		 </geometry>
+	<origin xyz="0 0 0.5" rpy="0 0 0" />
+	
     	</visual>
 </link>
 <link name="link2">
    	 <visual>
 
       		<geometry>
-        		<cylinder length="2" radius="0.05"/>
+        		<cylinder length="1" radius="0.05"/>
       		</geometry>
 	<material name="blue"/>
+	<origin xyz="0 0 0.5" rpy="0 0 0" />
     	</visual>
 	
   </link>
@@ -45,6 +49,7 @@
        			 <cylinder length="0.5" radius="0.05"/>
       		</geometry>
 	<material name="white"/>
+	<origin xyz="0 0 0.25" rpy="0 0 0" />
     	</visual>
 </link>
 
@@ -52,14 +57,15 @@
 	<parent link="floor"/>
 	<child link="link1"/>
 	<origin xyz="0 0 0" rpy="0 0 0" />
-	
+	<axis xyz="0 0 1"/>
 </joint>
 
 
 <joint name="joint2" type="continuous">
 	<parent link="link1"/>
 	<child link="link2"/>
-	<origin xyz="0 0 0.5" rpy="-1.57 0 0" />
+	<origin xyz="0 0 1" rpy="-1.57 0 0" />
+	<axis xyz="1 0 0"/>
 	
 </joint>
 
@@ -67,6 +73,7 @@
 	<parent link="link2"/>
 	<child link="link3"/>
 	<origin xyz="0 0 1" rpy="0 0 0" />
+	<axis xyz="1 0 0"/>
 	
 </joint>
 
