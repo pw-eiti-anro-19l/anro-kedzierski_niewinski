@@ -1,0 +1,8 @@
+prefix=/home/kuba/Desktop/anro/anro-kedzierski_niewinski/catkin_ws/install
+
+Name: r2d2
+Description: Description of r2d2
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/kuba/Desktop/anro/anro-kedzierski_niewinski/catkin_ws/install/lib 
+Requires: 

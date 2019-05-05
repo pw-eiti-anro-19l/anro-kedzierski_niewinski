@@ -7,4 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PWD="/home/mkedzie3/anro-kedzierski_niewinski/catkin_ws/build"
+export PWD="/home/kuba/Desktop/anro/anro-kedzierski_niewinski/catkin_ws/build"

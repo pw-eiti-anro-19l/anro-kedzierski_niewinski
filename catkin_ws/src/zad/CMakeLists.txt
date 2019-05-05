@@ -8,14 +8,10 @@ project(zad)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  urdf
+  joint_state_publisher
   roscpp
   rospy
-  sensor_msgs
   std_msgs
-  tf
-  kdl_conversions
-  kdl_parser
 )
 find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs tf)
 
@@ -200,9 +196,9 @@ include_directories(
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
-include_directories(include ${catkin_INCLUDE_DIRS})
-add_executable(state_publisher src/state_publisher.cpp)
-target_link_libraries(state_publisher ${catkin_LIBRARIES})
+#include_directories(include ${catkin_INCLUDE_DIRS})
+#add_executable(state_publisher src/state_publisher2.cpp)
+#target_link_libraries(state_publisher ${catkin_LIBRARIES})
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
