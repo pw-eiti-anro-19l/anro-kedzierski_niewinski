@@ -7,10 +7,15 @@ if __name__ == '__main__':
     print(dh)
     print("\n")
     index = 0
+    wynik = open("wynik.yaml","w")
     for x in dh:
-        print("joint number:"+ str(index))
-        xyz = "\""+str(x[1])+" 0.0 "+str(x[0])+"\""
-        rpy = "\""+str(x[2])+" 0.0 "+str(x[3])+"\""
-        print("xyz: "+xyz+"\nrpy:" + rpy)
+        name = "j"+ str(index)+":"
+        xyz = str(x[1])+" 0.0 "+str(x[0])
+        rpy = str(x[2])+" 0.0 "+str(x[3])
+        len = "len: "+str(x[4])
+        string = name+"\n\txyz: "+xyz+"\n\trpy: " + rpy+"\n\t"+len+"\n"
+        print(string)
+        wynik.write(string)
         index = index+1
+    wynik.close()
 
