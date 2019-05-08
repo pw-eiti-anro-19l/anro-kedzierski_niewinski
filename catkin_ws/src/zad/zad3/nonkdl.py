@@ -7,6 +7,7 @@ from tf.transformations import *
 from visualization_msgs.msg import Marker
 
 def callback(data):
+    marker=Marker()
     main_matrix = translation_matrix((0, 0, 0))
     infile = yaml.load(open("./plik.yaml"))
     dh = infile["dh"]
@@ -34,22 +35,37 @@ def callback(data):
     main_matrix = concatenate_matrices(t_list[0], t_list[1], t_list[2])
 
     x, y, z = translation_from_matrix(main_matrix)
-    
-    robot_pose = PoseStamped()
-    robot_pose.header.frame_id = "base_link"
-    robot_pose.header.stamp = rospy.Time.now()
-    robot_pose.pose.position.x = x
-    robot_pose.pose.position.y = y
-    robot_pose.pose.position.z = z
+
+
     
     xq, yq, zq, wq = quaternion_from_matrix(main_matrix)
 
-    robot_pose.pose.orientation.x = xq
-    robot_pose.pose.orientation.y = yq
-    robot_pose.pose.orientation.z = zq
-    robot_pose.pose.orientation.w = wq
+        
+    marker.type = marker.SPHERE
+    marker.action=marker.ADD
+    marker.header.frame_id = 'floor'
+    marker.header.stamp = rospy.Time.now()
 
-    publisher.publish(robot_pose)
+
+    marker.pose.position.x = x
+    marker.pose.position.y = y
+    marker.pose.position.z = z
+
+    marker.pose.orientation.x = xq
+    marker.pose.orientation.y = yq
+    marker.pose.orientation.z = zq
+    marker.pose.orientation.w = wq
+
+    marker.scale.x = 0.1;
+    marker.scale.y = 0.1;
+    marker.scale.z = 0.1;
+    marker.color.r = 0.0;
+    marker.color.g = 1.0;
+    marker.color.b = 0.0;
+    marker.color.a = 1.0;
+
+   
+    publisher.publish(marker)
 
 def nonkdl_listener():
     rospy.init_node('NONKDL_DKIN', anonymous = False)
@@ -61,7 +77,7 @@ def nonkdl_listener():
 
 if __name__ == '__main__':
     t_list = {}
-    publisher = rospy.Publisher('n_k_axes', PoseStamped, queue_size=10)
+    publisher = rospy.Publisher('n_k_axes', Marker, queue_size=100)
 
     print("Hello ")
     # laczenie z modelem

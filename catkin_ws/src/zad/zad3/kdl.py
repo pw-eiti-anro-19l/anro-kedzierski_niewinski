@@ -52,20 +52,28 @@ def callback(data):
     quaternion = eeFrame.M.GetQuaternion()
 
     
-    marker.header.frame_id = "/map"
+    marker.type = marker.SPHERE
+    marker.action=marker.ADD
+    marker.header.frame_id = 'floor'
+    marker.header.stamp = rospy.Time.now()
 
-    marker.type = marker.POINTS
-    marker.action = marker.ADD
-    marker.pose.orientation.w = 1
 
+    marker.pose.position.x = eeFrame.p[0]
+    marker.pose.position.y = eeFrame.p[1]
+    marker.pose.position.z = eeFrame.p[2]
 
-    ti = rospy.Duration()
-    marker.lifetime = ti
-    marker.scale.x = 0.4
-    marker.scale.y = 0.4
-    marker.scale.z = 0.4
-    marker.color.a = 1.0
-    marker.color.r = 1.0
+    marker.pose.orientation.x = quaternion[0]
+    marker.pose.orientation.y = quaternion[1]
+    marker.pose.orientation.z = quaternion[2]
+    marker.pose.orientation.w = quaternion[3]
+
+    marker.scale.x = 0.1;
+    marker.scale.y = 0.1;
+    marker.scale.z = 0.1;
+    marker.color.r = 0.0;
+    marker.color.g = 1.0;
+    marker.color.b = 0.0;
+    marker.color.a = 1.0;
 
    
     publisher.publish(marker)
@@ -82,7 +90,7 @@ if __name__ == '__main__':
 
     t_list = {}
 
-    publisher = rospy.Publisher('xD', Marker, queue_size=100)
+    publisher = rospy.Publisher('n_k_axes', Marker, queue_size=100)
     
  
     
