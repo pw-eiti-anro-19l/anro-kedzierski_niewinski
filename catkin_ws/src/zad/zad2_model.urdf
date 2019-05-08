@@ -1,6 +1,8 @@
-
+<?xml version="1.0"?>
 <robot name="zad2" xmlns:xacro="http://www.ros.org/wiki/xacro">
-<xacro:property name="params" value="${load_yaml('/urdfparam.yaml')}"/>
+
+<xacro:property name="params" value="${load_yaml('zad2/wynik.yaml')}"/>
+
 <material name="blue">
     <color rgba="0 0 0.8 1"/>
 </material>
@@ -24,17 +26,20 @@
     	<visual>
 
       		<geometry>
-        		<cylinder length="1" radius="0.05"/>
+        		<cylinder length="${params['j0']['len']}" radius="0.05"/>
      		 </geometry>
+	<origin xyz="0 0 ${params['j0']['len']/2}" rpy="0 0 0" />
+	
     	</visual>
 </link>
 <link name="link2">
    	 <visual>
 
       		<geometry>
-        		<cylinder length="1" radius="0.05"/>
+        		<cylinder length="${params['j1']['len']}" radius="0.05"/>
       		</geometry>
 	<material name="blue"/>
+	<origin xyz="0 0 ${params['j1']['len']/2}" rpy="0 0 0" />
     	</visual>
 	
   </link>
@@ -42,31 +47,34 @@
     	<visual>
 
      		 <geometry>
-       			<cylinder length="0.5" radius="0.05"/>
+       			 <cylinder length="${params['j2']['len']}" radius="0.05"/>
       		</geometry>
 	<material name="white"/>
+	<origin xyz="0 0 ${params['j2']['len']/2}" rpy="0 0 0" />
     	</visual>
 </link>
 
 <joint name="joint1" type="fixed">
 	<parent link="floor"/>
 	<child link="link1"/>
-	<origin xyz="0 0 0.5" rpy="0 0 0" />
-	
+	<origin xyz="${params['j0']['xyz']}" rpy="${params['j0']['rpy']}" />
+	<axis xyz="0 0 1"/>
 </joint>
 
 
 <joint name="joint2" type="fixed">
 	<parent link="link1"/>
 	<child link="link2"/>
-	<origin xyz="0 0.5 0.5" rpy="-1.57 0 0" />
+	<origin xyz="${params['j1']['xyz']}" rpy="${params['j1']['rpy']}" />
+	<axis xyz="1 0 0"/>
 	
 </joint>
 
 <joint name="joint3" type="fixed">
 	<parent link="link2"/>
 	<child link="link3"/>
-	<origin xyz="0 0 0.5" rpy="0 0 0" />
+	<origin xyz="${params['j2']['xyz']}" rpy="${params['j2']['rpy']}" />
+	<axis xyz="1 0 0"/>
 	
 </joint>
 
