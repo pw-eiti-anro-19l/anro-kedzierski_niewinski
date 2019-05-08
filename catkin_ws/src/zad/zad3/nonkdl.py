@@ -9,28 +9,38 @@ from visualization_msgs.msg import Marker
 def callback(data):
     marker=Marker()
     main_matrix = translation_matrix((0, 0, 0))
-    infile = yaml.load(open("./plik.yaml"))
-    dh = infile["dh"]
-    #print(dh)
-    #print("\n")
-    counter = 0
-    for i in dh:
-        #print(data)
-	
-        a = i[1]
-        d = i[2]
-        al = i[3]
-        th = i[4]
+    infile = yaml.load(open("./wynik.yaml"))
+    j0 = infile["j0"]
+    j1 = infile["j1"]
+    j2 = infile["j2"]
+    j=[j0,j1,j2]
+    #print(data.position[0])
+    #print(data.position[1])
+    #print(data.position[2])
 
-        matrix_a = translation_matrix((a, 0, 0))
-        matrix_al = rotation_matrix(al, (0, 0, 1))
-        matrix_d= translation_matrix((0, 0, -1.57))
-        matrix_th = rotation_matrix(th, (0, 0, 1))
+    i=0
+    while i<3:
+        th=j[i]['len']
+	x=j[i]['z']
+	b=th*j[i]['z']
+	if i==2:
+		b=-1
+	else:
+		b=1
+	if i==0:
+		a=1
+	else:
+		a=0
 
-        trans = concatenate_matrices(matrix_a, matrix_al, matrix_d, matrix_th)
-        t_list[counter] = trans
-
-        counter += 1
+	matrix_a = translation_matrix((0, 0, a))
+	matrix_al = rotation_matrix(j[i]['r'], (0, 1, 0))
+	matrix_d= translation_matrix((0, x*th, 0))
+	matrix_th = rotation_matrix(data.position[i], (0, 0, b))
+	trans = concatenate_matrices(matrix_a,matrix_al, matrix_th,matrix_d)
+	t_list[i] = trans
+	#print(i)
+	#print(trans)
+        i += 1
 
     main_matrix = concatenate_matrices(t_list[0], t_list[1], t_list[2])
     print(main_matrix)
