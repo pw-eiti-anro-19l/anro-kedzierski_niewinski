@@ -11,20 +11,20 @@ def callback(data):
     main_matrix = translation_matrix((0, 0, 0))
     infile = yaml.load(open("./plik.yaml"))
     dh = infile["dh"]
-    print(dh)
-    print("\n")
+    #print(dh)
+    #print("\n")
     counter = 0
     for i in dh:
-        print(data)
+        #print(data)
 	
-        a = i[0]
-        d = i[1]
-        al = i[2]
-        th = i[3]
+        a = i[1]
+        d = i[2]
+        al = i[3]
+        th = i[4]
 
         matrix_a = translation_matrix((a, 0, 0))
-        matrix_al = rotation_matrix(al, (1, 0, 0))
-        matrix_d= translation_matrix((0, 0, d*(1+data.position[counter])))
+        matrix_al = rotation_matrix(al, (0, 0, 1))
+        matrix_d= translation_matrix((0, 0, -1.57))
         matrix_th = rotation_matrix(th, (0, 0, 1))
 
         trans = concatenate_matrices(matrix_a, matrix_al, matrix_d, matrix_th)
@@ -33,15 +33,18 @@ def callback(data):
         counter += 1
 
     main_matrix = concatenate_matrices(t_list[0], t_list[1], t_list[2])
+    print(main_matrix)
 
     x, y, z = translation_from_matrix(main_matrix)
-
+    string=str(x)+" "+str(y)+" "+str(z)
+    #print(string)
 
     
     xq, yq, zq, wq = quaternion_from_matrix(main_matrix)
-
+    string=str(xq)+" "+str(yq)+" "+str(zq)+" "+str(wq)
+    #print(string)
         
-    marker.type = marker.SPHERE
+    marker.type = marker.CUBE
     marker.action=marker.ADD
     marker.header.frame_id = 'floor'
     marker.header.stamp = rospy.Time.now()
@@ -61,7 +64,7 @@ def callback(data):
     marker.scale.z = 0.1;
     marker.color.r = 0.0;
     marker.color.g = 1.0;
-    marker.color.b = 0.0;
+    marker.color.b = 1.0;
     marker.color.a = 1.0;
 
    
@@ -77,12 +80,12 @@ def nonkdl_listener():
 
 if __name__ == '__main__':
     t_list = {}
-    publisher = rospy.Publisher('n_k_axes', Marker, queue_size=100)
+    publisher = rospy.Publisher('nonkdl', Marker, queue_size=100)
 
-    print("Hello ")
+
     # laczenie z modelem
     try:
-            print("try") 
+
 	    nonkdl_listener()
     except rospy.ROSInterruptException:
 

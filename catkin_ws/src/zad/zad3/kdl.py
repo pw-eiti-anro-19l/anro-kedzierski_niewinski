@@ -29,13 +29,11 @@ def callback(data):
         al = i[2]
         th = i[3]
 
-        if counter!= 0:
-        	kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.TransZ), frame.DH(a - 0.5, al, d - 0.5, th)))
-
-        counter += 1
-    		
-    kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.TransZ), frame.DH(0, 0, d, th)))
+    kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.RotZ), frame.DH(0, 0, 1 , 0)))
+  		
+    kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.RotX), frame.DH(1, 0, 0, 1.57)))
     	
+    kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.RotY), frame.DH(0.5, 0, 0, 0)))
 
     jointPos = kdl.JntArray(kdlChain.getNrOfJoints())
     jointPos[0] = data.position[0] 
@@ -43,7 +41,7 @@ def callback(data):
     jointPos[2] = data.position[2]
     
     forvKin = kdl.ChainFkSolverPos_recursive(kdlChain)
-    eeFrame = kdl.Frame() # <--polaczyc eeFrame z reszta robota
+    eeFrame = kdl.Frame()
     forvKin.JntToCart(jointPos, eeFrame)
     print(eeFrame)
 
@@ -90,7 +88,7 @@ if __name__ == '__main__':
 
     t_list = {}
 
-    publisher = rospy.Publisher('n_k_axes', Marker, queue_size=100)
+    publisher = rospy.Publisher('kdl', Marker, queue_size=100)
     
  
     
