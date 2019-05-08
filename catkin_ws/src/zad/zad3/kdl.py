@@ -8,6 +8,7 @@ from visualization_msgs.msg import Marker
 
 
 def callback(data):
+    marker=Marker()
     kdlChain =kdl.Chain()   
     frame = kdl.Frame();
     main_matrix = translation_matrix((0, 0, 0))
@@ -51,20 +52,23 @@ def callback(data):
     quaternion = eeFrame.M.GetQuaternion()
 
     
-    robot_pose = PoseStamped()
-    robot_pose.header.frame_id = 'base_link'
-    robot_pose.header.stamp = rospy.Time.now()
+    marker.header.frame_id = "/map"
+
+    marker.type = marker.POINTS
+    marker.action = marker.ADD
+    marker.pose.orientation.w = 1
 
 
-    robot_pose.pose.position.x = eeFrame.p[0]
-    robot_pose.pose.position.y = eeFrame.p[1]
-    robot_pose.pose.position.z = eeFrame.p[2]
+    ti = rospy.Duration()
+    marker.lifetime = ti
+    marker.scale.x = 0.4
+    marker.scale.y = 0.4
+    marker.scale.z = 0.4
+    marker.color.a = 1.0
+    marker.color.r = 1.0
 
-    robot_pose.pose.orientation.x = quaternion[0]
-    robot_pose.pose.orientation.y = quaternion[1]
-    robot_pose.pose.orientation.z = quaternion[2]
-    robot_pose.pose.orientation.w = quaternion[3]
-    publisher.publish(robot_pose)
+   
+    publisher.publish(marker)
 
 def kdl_listener():
     rospy.init_node('KDL_DKIN', anonymous = False)
@@ -78,8 +82,8 @@ if __name__ == '__main__':
 
     t_list = {}
 
-    publisher = rospy.Publisher('n_k_axes', PoseStamped, queue_size=10)
-
+    publisher = rospy.Publisher('xD', Marker, queue_size=100)
+    
  
     
     # laczenie z modelem
