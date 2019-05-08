@@ -14,26 +14,11 @@ def callback(data):
     main_matrix = translation_matrix((0, 0, 0))
     infile = yaml.load(open("./plik.yaml"))
     dh = infile["dh"]
-    print(dh)
-    print("\n")
-    d=0
-    th=0
-    counter = 0
-    for i in dh:
-        #print(data)
-
-        last_d = d
-        last_th = th
-        a = i[0]
-        d = i[1]
-        al = i[2]
-        th = i[3]
-
-    kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.RotZ), frame.DH(0, 0, 1 , 0)))
+    kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.RotZ), frame.DH(0, 0, dh[0][4] , 0)))
   		
-    kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.RotX), frame.DH(1, 0, 0, 1.57)))
+    kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.RotX), frame.DH(dh[1][4], 0, 0, dh[1][2])))
     	
-    kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.RotY), frame.DH(0.5, 0, 0, 0)))
+    kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.RotY), frame.DH(dh[2][4], 0, 0, 0)))
 
     jointPos = kdl.JntArray(kdlChain.getNrOfJoints())
     jointPos[0] = data.position[0] 
@@ -43,7 +28,6 @@ def callback(data):
     forvKin = kdl.ChainFkSolverPos_recursive(kdlChain)
     eeFrame = kdl.Frame()
     forvKin.JntToCart(jointPos, eeFrame)
-    print(eeFrame)
 
 
 
