@@ -8,7 +8,7 @@ from visualization_msgs.msg import Marker
 
 
 def callback(data):
-    marker=Marker()
+    marker=PoseStamped()
     kdlChain =kdl.Chain()   
     frame = kdl.Frame();
     main_matrix = translation_matrix((0, 0, 0))
@@ -33,9 +33,6 @@ def callback(data):
 
     quaternion = eeFrame.M.GetQuaternion()
 
-    
-    marker.type = marker.SPHERE
-    marker.action=marker.ADD
     marker.header.frame_id = 'floor'
     marker.header.stamp = rospy.Time.now()
 
@@ -48,21 +45,13 @@ def callback(data):
     marker.pose.orientation.y = quaternion[1]
     marker.pose.orientation.z = quaternion[2]
     marker.pose.orientation.w = quaternion[3]
-
-    marker.scale.x = 0.13;
-    marker.scale.y = 0.13;
-    marker.scale.z = 0.13;
-    marker.color.r = 0.0;
-    marker.color.g = 1.0;
-    marker.color.b = 0.0;
-    marker.color.a = 1.0;
+    marker.pose.color(255,0,0)
 
    
     publisher.publish(marker)
 
 def kdl_listener():
     rospy.init_node('KDL_DKIN', anonymous = False)
-    # publisher = rospy.Publisher('n_k_axes', PoseStamped, queue_size=10)
 
     rospy.Subscriber("joint_states", JointState , callback)
 
@@ -72,11 +61,8 @@ if __name__ == '__main__':
 
     t_list = {}
 
-    publisher = rospy.Publisher('kdl', Marker, queue_size=100)
-    
- 
-    
-    # laczenie z modelem
+    publisher = rospy.Publisher('kdl', PoseStamped, queue_size=100)
+
     try:
 	    kdl_listener()        
     except rospy.ROSInterruptException:
