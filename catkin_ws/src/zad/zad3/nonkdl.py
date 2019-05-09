@@ -20,11 +20,14 @@ def callback(data):
     while i<3:
         th=j[i]['len']
 	x=j[i]['z']
-	b=th*j[i]['z']
 	if i==2:
 		b=-1
 	else:
 		b=1
+	if i==1:
+		p=0.1
+	else:
+		p=0
 	if i==0:
 		a=1
 	else:
@@ -48,7 +51,7 @@ def callback(data):
 
     
     xq, yq, zq, wq = quaternion_from_matrix(main_matrix)
-
+    print(quaternion_from_matrix(main_matrix))
     marker.header.frame_id = 'floor'
     marker.header.stamp = rospy.Time.now()
 
@@ -57,10 +60,10 @@ def callback(data):
     marker.pose.position.y = y
     marker.pose.position.z = z
 
-    marker.pose.orientation.x = 0
-    marker.pose.orientation.y = 0
-    marker.pose.orientation.z = 0.7
-    marker.pose.orientation.w = 0.7
+    marker.pose.orientation.x = xq
+    marker.pose.orientation.y = -zq
+    marker.pose.orientation.z = yq
+    marker.pose.orientation.w = wq
 
    
     publisher.publish(marker)
