@@ -1,0 +1,7 @@
+<launch>
+    <param name="use_gui" value="true"/>
+    rosrun tf static_transform_publisher 0.0 0.0 0.0 0.0 0.0 0.0 map my_frame 100
+    <node name="static_transform_publisher" type="static_transform_publisher" pkg="tf" args="0.0 0.0 0.0 0.0 0.0 0.0 floor my_frame 100"/>
+    <node name="oint" pkg="zad4" type="oint.py" output="screen" />
+    <node name="rviz" pkg="rviz" type="rviz" required="true"/>
+</launch>

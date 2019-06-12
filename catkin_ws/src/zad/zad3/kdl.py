@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import rospy
 import yaml
 import PyKDL as kdl
@@ -12,7 +13,8 @@ def callback(data):
     kdlChain =kdl.Chain()   
     frame = kdl.Frame();
     main_matrix = translation_matrix((0, 0, 0))
-    infile = yaml.load(open("./plik.yaml"))
+    global path
+    infile = yaml.load(open(path+"/src/zad/zad3/plik.yaml"))
     dh = infile["dh"]
     kdlChain.addSegment(kdl.Segment(kdl.Joint(kdl.Joint.RotZ), frame.DH(0, 0, dh[0][4] , 0)))
   		
@@ -57,7 +59,8 @@ def kdl_listener():
     rospy.spin()
 
 if __name__ == '__main__':
-
+    path = rospy.get_param("path")
+    path = path.replace('\n', '')
     t_list = {}
 
     publisher = rospy.Publisher('kdl', PoseStamped, queue_size=100)
