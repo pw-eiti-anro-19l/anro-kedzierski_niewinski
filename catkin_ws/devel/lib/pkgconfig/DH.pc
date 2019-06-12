@@ -1,8 +1,0 @@
-prefix=/home/kuba/Desktop/anro/anro-kedzierski_niewinski/catkin_ws/devel
-
-Name: DH
-Description: Description of DH
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/kuba/Desktop/anro/anro-kedzierski_niewinski/catkin_ws/devel/lib 
-Requires: 
