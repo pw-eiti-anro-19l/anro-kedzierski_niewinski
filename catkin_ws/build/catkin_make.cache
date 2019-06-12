@@ -1,2 +1,0 @@
-dh:lab2:zad
--DCATKIN_DEVEL_PREFIX=/home/kuba/Desktop/anro/anro-kedzierski_niewinski/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/kuba/Desktop/anro/anro-kedzierski_niewinski/catkin_ws/install -G Unix Makefiles

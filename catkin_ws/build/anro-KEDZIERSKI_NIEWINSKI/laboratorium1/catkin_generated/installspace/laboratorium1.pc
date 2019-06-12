@@ -1,8 +1,0 @@
-prefix=/home/mkedzie3/anro-kedzierski_niewinski/catkin_ws/install
-
-Name: laboratorium1
-Description: Description of laboratorium1
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/mkedzie3/anro-kedzierski_niewinski/catkin_ws/install/lib 
-Requires: 
