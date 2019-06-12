@@ -1,0 +1,13 @@
+<launch>
+	<param name="path" command="pwd"/>
+        <arg name="model" default="$(find zad)/zad2_model2.urdf" />
+	<arg name="gui" default="true"/>
+
+	<param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+	<param name="use_gui" value="$(arg gui)"/>
+	<node name="nonkdl" pkg="zad" type="nonkdl.py"/>
+	<node name="kdl" pkg="zad" type="kdl.py"/>
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<node name="joint_state_publisher" pkg="joint_state_publisher" 	type="joint_state_publisher"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-f floor -d $(find zad)/bothrviz.rviz" required="true"/>
+</launch>
